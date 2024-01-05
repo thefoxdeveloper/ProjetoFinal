@@ -23,7 +23,12 @@
       <section id="input-container">
         <h1>API de Rick and Morty</h1>
         <div class="filter-container">
-          <input id="filter" type="text" placeholder="Pesquisar" />
+          <input
+            id="buscador"
+            type="text"
+            placeholder="Pesquisar"
+            oninput="buscar()"
+          />
           <img
             id="search-img"
             src="./assets/search.svg"
@@ -35,20 +40,19 @@
     <main id="container"></main>
     <section id="pages-container">
       <i class="ph-fill ph-arrow-fat-left"></i>
-      <button class="back-page-button" onclick="getPreviousPage()">
-        Anterior
-      </button>
+      <button onclick="anterior()">Anterior</button>
+
       <span id="pages"> </span>
-      <button onclick="getNextPage()">Próxima</button>
+      <button onclick="proxima()">Próxima</button>
       <i class="ph-fill ph-arrow-fat-right"></i>
     </section>
     <footer>
       <img src="./assets/rick-and-morty.png" alt="Imagem de Rick e Morty" />
       <div>
         <section id="api-info">
-          <p>PERSONAGENS: <span data-count-characters="">0</span></p>
-          <p>LOCALIZAÇÕES: <span data-count-locations>0</span></p>
-          <p>EPISÓDIOS: <span data-count-episodes>0</span></p>
+          <p>PERSONAGENS: <span id="personagens">0</span></p>
+          <p>LOCALIZAÇÕES: <span id="localizacoes">0</span></p>
+          <p>EPISÓDIOS: <span id="episodios">0</span></p>
         </section>
         <section id="developer-info">
           <p>Desenvolvido por: <b>Douglas Santos</b> em 2023</p>
@@ -56,10 +60,7 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="translator.js"></script>
-    <script src="pageContext.js"></script>
+
     <script src="app.js"></script>
-    <script src="paginator.js"></script>
-    <script src="page-arrows.js"></script>
   </body>
 </html>
