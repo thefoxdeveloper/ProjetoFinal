@@ -90,7 +90,7 @@ totalCards = cards.length
     }
 
   
-  }  
+  }  renderizarButtons()
  
 }
 document.getElementById("anterior").addEventListener("click", anterior);
@@ -107,23 +107,31 @@ function status(cards) {
     return `<h4 >🩶 Desconhecido`;
   }
 }
+function renderizarButtons() {
+  if (totalCards>19) {
+    document.getElementById("anterior").classList.remove("hidden")
+  }else{  
+    document.getElementById("proxima").classList.add("hidden")
+
+  }
+  if(currentpage>1){
+    document.getElementById("proxima").classList.remove("hidden")
+  }else{
+    document.getElementById("anterior").classList.add("hidden")
+  }
+}
 function proxima() {
   if (totalCards>19) {
     currentpage++;
     montarCard();
-    document.getElementById("anterior").classList.remove("hidden")
-}else{
-  document.getElementById("proxima").classList.add("hidden")
-}
+    }
   }
   
 function anterior() {
   if (currentpage > 1) {
     currentpage--;
     montarCard();
-    document.getElementById("proxima").classList.remove("hidden")
-  }else{
-    document.getElementById("anterior").classList.add("hidden")
+   
   }
 }
 
