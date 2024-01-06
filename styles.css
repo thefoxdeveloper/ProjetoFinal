@@ -219,3 +219,6 @@ footer div {
   border: none; /* Remove any default border */
   width: 70%;
 }
+.hidden {
+  visibility: hidden;
+}

@@ -45,8 +45,7 @@ async function apiDataLoadCards(name, currentpage) {
   );
   return characters.data.results;
 }
-
-
+let totalCards = 0
 async function montarCard() {
   console.log("currentPage ", currentpage);
 
@@ -55,15 +54,20 @@ async function montarCard() {
   const cards = await apiDataLoadCards(searchTerm, currentpage);
   container.innerHTML = "";
   let index = 0;
+totalCards = cards.length
 
   for (const personagem of cards) {
     index++;
-    console.log("primeiro index ", index);
-    const episodeName = await getEpisode(personagem.episode[personagem.episode.length - 1]);
+    
+    const episodeName = await getEpisode(
+      personagem.episode[personagem.episode.length - 1]
+    );
 
     container.innerHTML += `
       <article class="card">
-        <img class="character-image" src="${personagem.image}" alt="Character image">
+        <img class="character-image" src="${
+          personagem.image
+        }" alt="Character image">
         <div class="character-info">
           <div>
             <h2>${personagem.name}</h2>
@@ -84,31 +88,46 @@ async function montarCard() {
     if (index % 2 === 0 && index !== cards.length) {
       container.innerHTML += `<div class="horizontal-line"></div>`;
     }
+
+  
+  }  
+ 
+}
+document.getElementById("anterior").addEventListener("click", anterior);
+document.getElementById("proxima").addEventListener("click", proxima);
+montarCard();
+
+function status(cards) {
+  if (cards.status == "Alive") {
+    return `<h4 >💚 Vivo`;
+  }
+  if (cards.status == "Dead") {
+    return `<h4 >❤️ Morto`;
+  } else {
+    return `<h4 >🩶 Desconhecido`;
   }
 }
+function proxima() {
+  if (totalCards>19) {
+    currentpage++;
+    montarCard();
+    document.getElementById("anterior").classList.remove("hidden")
+}else{
+  document.getElementById("proxima").classList.add("hidden")
+}
+  }
   
-  montarCard()
+function anterior() {
+  if (currentpage > 1) {
+    currentpage--;
+    montarCard();
+    document.getElementById("proxima").classList.remove("hidden")
+  }else{
+    document.getElementById("anterior").classList.add("hidden")
+  }
+}
 
-  function status(cards) {
-    if (cards.status == "Alive") {
-      return `<h4 >💚 Vivo`;
-    }
-    if (cards.status == "Dead") {
-      return `<h4 >❤️ Morto`;
-    } else {
-      return `<h4 >🩶 Desconhecido`;
-    }
-  }
-  function proxima() {
-    currentpage++
-    montarCard()
-  } 
-   function anterior() {
-    currentpage--
-    montarCard()
-  }
-
-  function buscar() {
-    currentpage =1
-    montarCard()
-  }
+function buscar() {
+  currentpage = 1;
+  montarCard();
+}
