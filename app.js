@@ -55,7 +55,8 @@ async function montarCard() {
   container.innerHTML = "";
   let index = 0;
 totalCards = cards.length
-
+console.log("total de cards ",totalCards);
+renderizarButtons()
   for (const personagem of cards) {
     index++;
     
@@ -90,7 +91,7 @@ totalCards = cards.length
     }
 
   
-  }  renderizarButtons()
+  }  
  
 }
 document.getElementById("anterior").addEventListener("click", anterior);
@@ -108,22 +109,25 @@ function status(cards) {
   }
 }
 function renderizarButtons() {
-  if (totalCards>19) {
-    document.getElementById("anterior").classList.remove("hidden")
-  }else{  
-    document.getElementById("proxima").classList.add("hidden")
 
-  }
-  if(currentpage>1){
-    document.getElementById("proxima").classList.remove("hidden")
-  }else{
+  if(currentpage<2){
     document.getElementById("anterior").classList.add("hidden")
+  }
+  if (currentpage>=2) {
+    document.getElementById("anterior").classList.remove("hidden")
+  }
+  if(totalCards<20){
+    document.getElementById("proxima").classList.add("hidden")
+  }
+  if (totalCards>19) {
+    document.getElementById("proxima").classList.remove("hidden")
   }
 }
 function proxima() {
   if (totalCards>19) {
     currentpage++;
     montarCard();
+   
     }
   }
   
