@@ -47,7 +47,7 @@ async function apiDataLoadCards(name, currentpage) {
 }
 let totalCards = 0
 async function montarCard() {
-  console.log("currentPage ", currentpage);
+
 
   const searchTerm = document.getElementById("buscador").value;
   pages.innerHTML = currentpage;
@@ -55,7 +55,7 @@ async function montarCard() {
   container.innerHTML = "";
   let index = 0;
 totalCards = cards.length
-console.log("total de cards ",totalCards);
+
 renderizarButtons()
   for (const personagem of cards) {
     index++;
@@ -138,7 +138,7 @@ function anterior() {
    
   }
 }
-
+buscador.addEventListener('input',buscar)
 function buscar() {
   currentpage = 1;
   montarCard();
